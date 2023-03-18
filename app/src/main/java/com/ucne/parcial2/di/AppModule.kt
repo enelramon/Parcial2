@@ -22,13 +22,13 @@ object AppModule {
     fun providesMoshi(): Moshi {
         return Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
-//    @Singleton
-//    @Provides
-//    fun providesTePrestoApi(moshi: Moshi): TicketsApi {
-//        return Retrofit.Builder()
-//            .baseUrl("https://teprestoapi.azurewebsites.net")
-//            .addConverterFactory(MoshiConverterFactory.create(moshi))
-//            .build()
-//            .create(TicketsApi::class.java)
-//    }
+    @Singleton
+    @Provides
+    fun providesTePrestoApi(moshi: Moshi): TicketsApi {
+        return Retrofit.Builder()
+            .baseUrl("https://teprestoapi.azurewebsites.net")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(TicketsApi::class.java)
+    }
 }

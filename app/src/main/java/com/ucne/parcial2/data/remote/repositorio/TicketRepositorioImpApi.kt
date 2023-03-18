@@ -1,4 +1,4 @@
-package com.ucne.parcial2.data.remote.repository
+package com.ucne.parcial2.data.remote.repositorio
 
 import com.ucne.parcial2.data.remote.TicketsApi
 import com.ucne.parcial2.data.remote.dto.TicketDto
@@ -9,18 +9,17 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class TicketsRepositoryImp @Inject constructor(
-    private val api: TicketsApi
-): TicketRepository {
+class TicketRepositorioImpApi @Inject constructor(
+    private val ticketsApi: TicketsApi
+): TicketRepositorioApi {
 
     override fun getTickets(): Flow<Resource<List<TicketDto>>> = flow {
         try {
             emit(Resource.Loading()) //indicar que estamos cargando
 
-            val ocupaciones =
-                api.getTickets() //descarga las ocupaciones de internet, se supone quedemora algo
+            val ticket = ticketsApi.getTickets() //descarga las ocupaciones de internet, se supone quedemora algo
 
-            emit(Resource.Success(ocupaciones)) //indicar que se cargo correctamente y pasarle las monedas
+            emit(Resource.Success(ticket)) //indicar que se cargo correctamente y pasarle las monedas
         } catch (e: HttpException) {
             //error general HTTP
             emit(Resource.Error(e.message ?: "Error HTTP GENERAL"))
@@ -30,9 +29,11 @@ class TicketsRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun putTicket(id: Int, ticketDto: TicketDto) {
-        api.putTicket(id, ticketDto )
+    override suspend fun putTickets(id: Int, ticketDto: TicketDto) {
+        ticketsApi.putTicket(id, ticketDto)
     }
-
-    override suspend fun deleteTicket(id: Int) = api.deleteTicket(id)
+    override suspend fun deleteTickets(id: Int) = ticketsApi.deleteTicket(id)
+    override suspend fun postTickets(ticketDto: TicketDto) {
+        ticketsApi.postTicket(ticketDto)
+    }
 }

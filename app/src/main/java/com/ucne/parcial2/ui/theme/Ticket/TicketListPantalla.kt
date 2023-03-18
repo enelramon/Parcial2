@@ -48,7 +48,7 @@ fun TicktetListScreen(
                 .wrapContentSize(Alignment.TopStart)
                 .clickable {
                     scope.launch {
-                        navController.navigate(ScreenModule.Tickets.route)
+                        navController.navigate(ScreenModule.TicketsList.route)
                     }
                 }
         )
@@ -69,8 +69,6 @@ fun TicktetListScreen(
         }
     }
 }
-
-
 
 @Composable
 fun TicketListBody(ticketList: List<TicketDto>) {

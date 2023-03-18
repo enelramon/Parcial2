@@ -56,7 +56,7 @@ private fun TicketsBody(
                 .padding(4.dp)
                 .clickable {
                     scope.launch {
-                        navController.navigate(ScreenModule.TicketsList.route)
+                        navController.navigate(ScreenModule.Tickets.route)
                     }
                 }
         )
@@ -127,21 +127,17 @@ private fun TicketsBody(
 
 
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(Alignment.BottomCenter)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
         ) {
             ExtendedFloatingActionButton(
-                modifier = Modifier
-                    .size(120.dp, 120.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .wrapContentSize(Alignment.Center),
+                modifier = Modifier.size(120.dp),
+                onClick = { viewModel.insertar() },
                 text = { Text("Guardar") },
-                icon = { Icon(imageVector = Icons.Filled.Save, contentDescription = "Save") },
-                onClick = {
-                    viewModel.insertar()
-                }
+                icon = { Icon(imageVector = Icons.Filled.Save, contentDescription = "Save") }
             )
         }
+
     }
 }

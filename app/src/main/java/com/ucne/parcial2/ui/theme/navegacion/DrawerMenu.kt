@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -23,7 +24,7 @@ fun DrawerMenu(
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val ic  = Icons.TwoTone.Favorite
+    val ic  =Icons.TwoTone.Favorite
 
     val items = listOf(ScreenModule.Start, ScreenModule.Tickets, ScreenModule.TicketsList)
     val selectedItem = remember { mutableStateOf(items[0]) }
@@ -46,34 +47,20 @@ fun DrawerMenu(
                     )
                 }
             }
-        }
-    ) {
-        Spacer(Modifier.height(12.dp))
-        TopAppBar(
-            modifier = Modifier
-                .background(Color.Blue)
-                .padding(horizontal = 16.dp, vertical = 10.dp)
-                .clip(shape = RoundedCornerShape(20.dp)),
-            title = {
-                Box(
-                    modifier = Modifier,
-                    Alignment.Center
-                ) {
-                    Text(text = "Inicio")
+        },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = if (drawerState.isClosed) ">>> Swipe >>>" else "<<< Swipe <<<")
+                Spacer(Modifier.height(20.dp))
+                Button(onClick = { scope.launch { drawerState.open() } }) {
+                    Text("Click para abrir")
                 }
-            },
-            navigationIcon = {
-                IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                    Icon(
-                        imageVector = Icons.Default.Menu,
-                        contentDescription = "Icon"
-                    )
-                }
-            },
-            actions = {
-                IconButton(onClick = {}) {}
-                IconButton(onClick = {}) {}
             }
-        )
-    }
+        }
+    )
 }

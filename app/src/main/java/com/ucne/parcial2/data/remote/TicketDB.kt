@@ -9,7 +9,7 @@ import com.ucne.parcial2.data.remote.dao.TicketDao
     entities = [
         TicketEntity::class
     ],
-    version = 0
+    version = 1
 )
 abstract class TicketDb: RoomDatabase() {
     abstract val ticketDao: TicketDao

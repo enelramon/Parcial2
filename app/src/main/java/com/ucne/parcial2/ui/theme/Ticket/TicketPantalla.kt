@@ -126,18 +126,17 @@ private fun TicketsBody(
         )
 
 
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            ExtendedFloatingActionButton(
-                modifier = Modifier.size(120.dp),
-                onClick = { viewModel.insertar() },
-                text = { Text("Guardar") },
-                icon = { Icon(imageVector = Icons.Filled.Save, contentDescription = "Save") }
-            )
-        }
-
+        ExtendedFloatingActionButton(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            text = { Text("Guardar") },
+            icon = { Icon(imageVector = Icons.Filled.Save, contentDescription = "Save") },
+            onClick = { viewModel.insertar() }
+        )
     }
+
 }
+
+
+
